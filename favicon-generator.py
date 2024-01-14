@@ -1,4 +1,5 @@
 import sys
+import os
 from PIL import Image
 
 def generate_favicons(input_image_path):
@@ -6,16 +7,20 @@ def generate_favicons(input_image_path):
         # Open the input image
         img = Image.open(input_image_path)
 
-        # Favicon.ico (Windows)
+        # Resize the image to reduce file size
+        max_size = (16, 16)
+        img.thumbnail(max_size)
+
+        # Save the favicon.ico (Windows)
         img.save("favicon.ico")
 
-        # Apple Touch Icon (iOS)
+        # Save the apple-touch-icon.png (iOS)
         img.save("apple-touch-icon.png")
 
-        # Favicon 16x16 (Most browsers)
+        # Save the favicon-16x16.png (Most browsers)
         img.save("favicon-16x16.png", size=(16, 16))
 
-        # Favicon 32x32 (Most browsers)
+        # Save the favicon-32x32.png (Most browsers)
         img.save("favicon-32x32.png", size=(32, 32))
 
         print("Favicons generated successfully!")
